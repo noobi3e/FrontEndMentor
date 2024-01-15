@@ -6,8 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Frontend Quiz App</title>
   </head>
-  <body>
-    <div id="app"></div>
+  <body class="bg-primary text-white">
+    <div class="w-[1400px] mx-auto">
+      <!-- MAIN QUIZ CONTAINER -->
+      <main class="flex items-start gap-16">
+        <!-- QUESTIONS SECTION -->
+        <section class="flex flex-col gap-6 flex-1">
+          <!-- QUESTION LABEL -->
+          <em class="text-white text-opacity-50">Question 6 of 10</em>
+
+          <!-- QUESTION -->
+          <h2 id="question" class="text-5xl">
+            Which of these color contrast ratio defines the minimum WCAG 2.1
+            Level AA requirement for normal text?
+          </h2>
+
+          <!-- Progress BAR -->
+          <div
+            class="w-[90%] p-[3px] h-[15px] mt-auto bg-primaryLight rounded-full">
+            <p
+              id="progressBar"
+              class="bg-secondary h-full transition-all rounded-full w-0"></p>
+          </div>
+        </section>
+
+        <!-- OPTIONS SECTION -->
+        <section class="flex-1">
+          <form id="answerForm" action="#">
+            <div id="optionsContainer" class="flex flex-col gap-5"></div>
+            <button
+              type="submit"
+              id="submitButton"
+              class="w-full h-[90px] mt-8 rounded-[26px] bg-secondary flex items-center text-3xl justify-center font-semibold gap-5 p-4 transition-all">
+              Submit answer
+            </button>
+          </form>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
