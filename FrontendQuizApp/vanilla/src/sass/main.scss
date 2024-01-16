@@ -1,9 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body.dark {
+  @apply bg-primary text-gray-50;
+}
+
+// body.light {
+//   @apply text-primaryDark bg-white;
+// }
+html {
+  font-family: 'Rubik', sans-serif;
+}
+
 @layer components {
-  input[name='answers']:checked + div {
-    background: #2c3949;
+  .toggleDOT {
+    position: absolute;
+    top: 50%;
+    height: 1rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 999px;
+    background-color: white;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-out;
+    left: 0.25rem;
+  }
+
+  .toggleINP:checked + label span {
+    left: calc(100% - 1.25rem);
+  }
+
+  .toggleINP:checked + label {
+    @apply bg-secondary;
+  }
+
+  input[name='answers'] + label {
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
+  }
+
+  input[name='answers']:checked + label {
+    @apply border-secondary;
+  }
+
+  input[name='answers']:checked + label span {
+    @apply bg-secondary text-white;
+  }
+
+  input[name='answers']:disabled + label {
+    @apply cursor-not-allowed;
+  }
+
+  .comeIn {
+    animation: come_in 0.5s ease-out backwards;
+  }
+
+  article.showAnswer {
+    label.wrong {
+      @apply border-red-500 text-red-500;
+
+      span.wrong {
+        @apply bg-red-500;
+      }
+    }
+
+    label.right {
+      @apply border-green-500 text-green-500;
+
+      span.right {
+        @apply bg-green-500;
+      }
+    }
+
+    img {
+      display: inline-block;
+    }
+  }
+}
+
+@keyframes come_in {
+  0% {
+    transform: translateX(40%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
   }
 }

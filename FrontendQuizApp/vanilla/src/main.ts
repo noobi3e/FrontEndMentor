@@ -1,33 +1,31 @@
 import './sass/main.scss'
+import 'bootstrap-icons/font/bootstrap-icons.min.css'
 import { HTML_ELEMENTS } from './lib/elements'
-import { GenerateOptions } from './lib/functions'
+import { Quiz } from './lib/classes'
 
-let per = 0
-setInterval(() => {
-  per += 1
+// ICONS
+const Icons = {
+  moon: 'bi bi-moon text-white',
+  sun: 'bi bi-sun text-white',
+}
 
-  HTML_ELEMENTS.progressBar.style.width = `${per}%`
+HTML_ELEMENTS.toggleModeINP.defaultChecked = true
+HTML_ELEMENTS.toggleModeIcon.className = Icons.moon
 
-  if (per >= 100) per = 0
-}, 100)
+// Functions
+HTML_ELEMENTS.toggleModeINP.addEventListener('change', (e) => {
+  const INP = e.target as typeof HTML_ELEMENTS.toggleModeINP
 
-console.log('I AM HERE')
+  // document.body.className = INP.checked ? 'dark' : 'light'
+  HTML_ELEMENTS.toggleModeIcon.className = INP.checked ? Icons.moon : Icons.sun
+})
 
-const options = GenerateOptions([
-  {
-    title: '4.5:1',
-  },
-  {
-    title: '3 : 1',
-  },
-  {
-    title: '2.5:1',
-  },
-  {
-    title: '5:1',
-  },
-])
+const quiz = new Quiz()
 
-options.forEach((el) =>
-  HTML_ELEMENTS.optionsContainer.insertAdjacentHTML('beforeend', el)
-)
+window.onload = () => {
+  const href = location.href.split('/').at(-1) || ''
+
+  if (!href) return quiz.init()
+
+  return quiz.start()
+}

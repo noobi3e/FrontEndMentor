@@ -1,49 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frontend Quiz App</title>
-  </head>
-  <body class="bg-primary text-white">
-    <div class="w-[1400px] mx-auto">
-      <!-- MAIN QUIZ CONTAINER -->
-      <main class="flex items-start gap-16">
-        <!-- QUESTIONS SECTION -->
-        <section class="flex flex-col gap-6 flex-1">
-          <!-- QUESTION LABEL -->
-          <em class="text-white text-opacity-50">Question 6 of 10</em>
 
-          <!-- QUESTION -->
-          <h2 id="question" class="text-5xl">
-            Which of these color contrast ratio defines the minimum WCAG 2.1
-            Level AA requirement for normal text?
-          </h2>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Quiz App</title>
+</head>
 
-          <!-- Progress BAR -->
-          <div
-            class="w-[90%] p-[3px] h-[15px] mt-auto bg-primaryLight rounded-full">
-            <p
-              id="progressBar"
-              class="bg-secondary h-full transition-all rounded-full w-0"></p>
+<body class="dark">
+  <div class="w-[1400px] mx-auto max-[1400px]:w-full max-[1400px]:px-16 max-[700px]:px-10 max-[550px]:px-5">
+    <header class="flex justify-between items-center py-16 max-[700px]:py-10 max-[550px]:py-8">
+      <!-- HEADER -->
+      <div class="flex items-center gap-4" id="activeQuizHeader">
+      </div>
+
+      <!-- OPTIONS -->
+      <nav class="flex items-center gap-5">
+        <!-- TOGGLER -->
+        <div>
+          <input type="checkbox" hidden class="toggleINP" id="toggleModeINP">
+          <label role="button" for="toggleModeINP" class="w-[42px] h-6 rounded-full bg-primaryLight flex relative">
+            <span class="toggleDOT" />
+          </label>
+        </div>
+
+        <button type="button" id="modeToggleIcon" class="">
+          <i class="bi bi-moon" id="toggleModeIcon"></i>
+        </button>
+      </nav>
+    </header>
+
+    <!-- MAIN QUIZ CONTAINER -->
+    <main
+      class="flex items-start mb-16 gap-20 max-[1215px]:gap-10 max-[1050px]:flex-col max-[1050px]:items-stretch max-[1050px]:gap-0 max-[700px]:mb-10 max-[550px]:mb-8 max-[400px]:mb-5">
+      <!-- QUESTIONS SECTION -->
+      <section class="flex flex-col gap-6 flex-1 self-stretch">
+        <!-- QUESTION LABEL -->
+        <em class="text-white text-opacity-50" id="infoLabel">Question 6 of 10</em>
+
+        <!-- QUESTION -->
+        <h1 id="question" class="text-5xl flex flex-col gap-2">
+
+          <span class="font-thin">
+            Welcome to the
+          </span>
+
+          <strong class="text-6xl font-medium">Frontend Quiz !</strong>
+        </h1>
+
+        <!-- Progress BAR -->
+        <div
+          class="w-[90%] p-[3px] h-[15px] mt-auto mb-[130px] shadow bg-primaryLight rounded-full hidden max-[1050px]:my-10 max-[1050px]:w-full"
+          id="progressBarBOX">
+          <p id="progressBar" class="bg-secondary h-full transition-all rounded-full w-0"></p>
+        </div>
+      </section>
+
+      <!-- OPTIONS SECTION -->
+      <section class="flex-1">
+        <form id="answerForm" action="#">
+          <p id="errorBox" class="text-center font-medium text-xl text-red-500 mb-5">
+
+          <div id="optionsContainer" class="flex flex-col overflow-x-hidden gap-5 max-[1050px]:gap-6 max-[400px]:gap-4">
+            <!-- OPTIONS OR SUBJECTS -->
           </div>
-        </section>
+          <!-- ERROR BOX -->
 
-        <!-- OPTIONS SECTION -->
-        <section class="flex-1">
-          <form id="answerForm" action="#">
-            <div id="optionsContainer" class="flex flex-col gap-5"></div>
-            <button
-              type="submit"
-              id="submitButton"
-              class="w-full h-[90px] mt-8 rounded-[26px] bg-secondary flex items-center text-3xl justify-center font-semibold gap-5 p-4 transition-all">
-              Submit answer
-            </button>
-          </form>
-        </section>
-      </main>
-    </div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+          </p>
+          <button type="submit" id="submitButton"
+            class="w-full h-[90px] mt-10 rounded-[26px] bg-secondary flex items-center text-2xl justify-center font-semibold gap-5 p-4 transition-all">
+            Submit answer
+          </button>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
