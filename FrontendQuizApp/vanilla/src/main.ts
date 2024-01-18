@@ -1,29 +1,21 @@
 import './sass/main.scss'
 import 'bootstrap-icons/font/bootstrap-icons.min.css'
-import { HTML_ELEMENTS } from './lib/elements'
-import { Quiz } from './lib/classes'
-
-// ICONS
-const Icons = {
-  moon: 'bi bi-moon text-white',
-  sun: 'bi bi-sun text-white',
-}
-
-HTML_ELEMENTS.toggleModeINP.defaultChecked = true
-HTML_ELEMENTS.toggleModeIcon.className = Icons.moon
-
-// Functions
-HTML_ELEMENTS.toggleModeINP.addEventListener('change', (e) => {
-  const INP = e.target as typeof HTML_ELEMENTS.toggleModeINP
-
-  // document.body.className = INP.checked ? 'dark' : 'light'
-  HTML_ELEMENTS.toggleModeIcon.className = INP.checked ? Icons.moon : Icons.sun
-})
+import { Quiz, UI } from './lib/classes'
 
 const quiz = new Quiz()
+const ui = new UI()
 
 window.onload = () => {
   const href = location.href.split('/').at(-1) || ''
+
+  const mode = {
+    light: ui.lightMode.bind(ui),
+    dark: ui.darkMode.bind(ui),
+  }
+
+  const userMode = localStorage.getItem('mode') as keyof typeof mode
+
+  userMode && mode[userMode]()
 
   if (!href) return quiz.init()
 

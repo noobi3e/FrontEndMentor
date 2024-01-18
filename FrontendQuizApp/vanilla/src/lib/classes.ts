@@ -2,7 +2,56 @@ import { QUIZ_QUESTIONS } from './data'
 import { HTML_ELEMENTS } from './elements'
 import { OPTIONS, Questions } from './types'
 
-export class UI {}
+export class UI {
+  #body = document.body
+  #toggleModeBtn = HTML_ELEMENTS.toggleModeINP
+  #toggleModeIcon = HTML_ELEMENTS.toggleModeIcon
+  #optionContainer = HTML_ELEMENTS.optionsContainer
+  #progressBar = HTML_ELEMENTS.progressBarBOX
+  #infoLabel = HTML_ELEMENTS.infoLabel
+  #graphics = {
+    top: HTML_ELEMENTS.graphicsTop,
+    bottom: HTML_ELEMENTS.graphicsBottom,
+  }
+  #icons = {
+    moon: 'bi bi-moon text-white',
+    sun: 'bi bi-sun text-white',
+  }
+
+  constructor() {
+    this.#toggleModeBtn.addEventListener('change', (e) => {
+      const INP = e.target as typeof HTML_ELEMENTS.toggleModeINP
+      localStorage.setItem('mode', INP.checked ? 'dark' : 'light')
+      INP.checked ? this.darkMode() : this.lightMode()
+    })
+  }
+
+  lightMode() {
+    this.#toggleModeBtn.checked = false
+    this.#body.classList.add('cus-light')
+    this.#body.classList.remove('cus-dark')
+    this.#toggleModeIcon.className = this.#icons.sun
+    this.#toggleModeIcon.style.color = '#2C3949'
+    this.#optionContainer.classList.add('cus-light')
+    this.#progressBar.style.background = '#EBF2FF'
+    this.#graphics.top.style.borderColor = '#F5F6FD'
+    this.#graphics.bottom.style.borderColor = '#F5F6FD'
+    this.#infoLabel.style.color = '#2C3949'
+  }
+
+  darkMode() {
+    this.#toggleModeBtn.checked = true
+    this.#infoLabel.style.color = '#F5F6FD80'
+    this.#body.classList.add('cus-dark')
+    this.#body.classList.remove('cus-light')
+    this.#toggleModeIcon.className = this.#icons.moon
+    this.#toggleModeIcon.style.color = '#F5F6FD'
+    this.#optionContainer.classList.remove('cus-light')
+    this.#progressBar.style.background = '#2C3949'
+    this.#graphics.top.style.borderColor = '#2C3949'
+    this.#graphics.bottom.style.borderColor = '#2C3949'
+  }
+}
 
 export class Quiz {
   static OPTION_LABELS = ['a', 'b', 'c', 'd']
@@ -19,7 +68,7 @@ export class Quiz {
   #activeQuizHeader = HTML_ELEMENTS.activeQuizHeader
   #quesIndex = 0
   #progressBarBox = HTML_ELEMENTS.progressBarBOX
-  #mode: 'next' | 'submit' | 'results' = 'submit'
+  #mode: 'next' | 'submit' | 'results' | 'reset' = 'submit'
   #error = HTML_ELEMENTS.errorBox
   #score = 0
 
@@ -36,7 +85,9 @@ export class Quiz {
     // IN BELOW CODE I am applying right or wrong classes conditionally which will be get used later to show right or wrong answer state.
     return `
       <article class="">
-        <input type="radio" name="answers" id="option${optionNo}" class="answersINP" hidden />     
+        <input type="radio" name="answers" id="option${optionNo}" class="answersINP" hidden value=${
+      option.isCorrect ? 'right' : 'wrong'
+    } />     
         <label 
         style="animation-delay: 0.${optionNo}s"
         for="option${optionNo}" role="button" class="text-2xl w-full h-[90px] rounded-[24px] bg-primaryLight flex items-center gap-5 p-4 transition-all border-[4px] border-transparent comeIn ${
@@ -66,6 +117,50 @@ export class Quiz {
     optionsHTML.forEach((el) =>
       this.#optionsContainer.insertAdjacentHTML('beforeend', el)
     )
+  }
+
+  _error(errMessage: string) {
+    this.#error.textContent = errMessage
+  }
+
+  _showResult() {
+    this.#questionEl.innerHTML = `
+     <span class="font-thin"> Quiz Completed </span>
+    <strong class="text-8xl font-medium mt-1">You Scored....</strong>
+    `
+
+    const searchParams = new URLSearchParams(window.location.search)
+
+    const type = searchParams.get('type')
+
+    this.#questions =
+      Quiz.SUJECTS.find((el) => el.title.toLowerCase() === type)?.questions ||
+      []
+
+    this.#optionsContainer.innerHTML = `
+    <div class="w-full p-8 flex flex-col gap-10 bg-primaryLight shadow-custom rounded-2xl items-center">
+      <div class="flex gap-2 items-center">
+        <div
+        style="background: ${
+          Quiz.SUJECTS.find((el) => el.title.toLowerCase() === type)
+            ?.backgroundColor
+        }"
+        class="aspect-square h-[50px] rounded-[8px] transition-all flex items-center justify-center text-primary font-semibold text-2xl">
+        <img src="${
+          Quiz.SUJECTS.find((el) => el.title.toLowerCase() === type)?.icon
+        }" />
+        </div>
+        <h2 class="text-2xl" >
+        ${Quiz.SUJECTS.find((el) => el.title.toLowerCase() === type)?.title}
+        </h2>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <h3 class="text-7xl">${this.#score}</h3>
+        <p>out of ${this.#questions.length}</p>
+      </div>
+    </div>
+    `
   }
 
   // Function to Update Label
@@ -143,6 +238,7 @@ export class Quiz {
 
     this.#answerForm.addEventListener('submit', (e) => {
       e.preventDefault()
+      this._error('')
 
       const answersHTML = Array.from(
         document.getElementsByClassName('answersINP')
@@ -150,13 +246,15 @@ export class Quiz {
       let isAnswered = false
 
       answersHTML.forEach((el) => {
+        // Adding a Event Listener to every option input to set error to none
+        el.addEventListener('change', () => this._error(''))
         if (el.checked) isAnswered = true
       })
 
       const userAns = answersHTML.find((el) => el.checked)
 
-      if (!isAnswered)
-        return (this.#error.textContent = 'Please Select one option')
+      if (this.#mode !== 'reset' && !isAnswered)
+        return this._error('Please Select one option')
 
       switch (this.#mode) {
         case 'next':
@@ -182,11 +280,19 @@ export class Quiz {
           answersHTML.forEach((el) => (el.disabled = true))
           // adding "showAnser" class on input parent article element.
           userAns?.closest('article')?.classList.add('showAnswer')
+          if (userAns?.value === 'right') this.#score += 1
 
           break
 
         case 'results':
-          console.log('I AM HERE')
+          this.#progressBarBox.style.display = 'none'
+          this._showResult()
+          this.#mode = 'reset'
+          this.#submitBtn.textContent = 'Play Again'
+          break
+
+        case 'reset':
+          location.replace('/')
           break
 
         default:
@@ -202,6 +308,12 @@ export class Quiz {
     this.#activeQuizHeader.innerHTML = ''
     this.#optionsContainer.innerHTML = ''
     this.#submitBtn.style.display = 'none'
+    this.#questionEl.innerHTML = `
+    <span class="font-thin"> Welcome to the </span>
+    <strong class="text-6xl font-medium">Frontend Quiz !</strong>
+    `
+    this.#score = 0
+    this.#questions = []
 
     const sujectsHTML = Quiz.SUJECTS.map(
       (el) =>

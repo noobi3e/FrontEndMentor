@@ -32,6 +32,11 @@ const activeQuizHeader = document.getElementById(
 
 const errorBox = document.getElementById('errorBox') as HTMLParagraphElement
 
+const graphicsTop = document.getElementById('graphicsTop') as HTMLDivElement
+const graphicsBottom = document.getElementById(
+  'graphicsBottom'
+) as HTMLDivElement
+
 export const HTML_ELEMENTS = {
   progressBar,
   question,
@@ -44,4 +49,6 @@ export const HTML_ELEMENTS = {
   infoLabel,
   activeQuizHeader,
   errorBox,
+  graphicsBottom,
+  graphicsTop,
 }
