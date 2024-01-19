@@ -10,7 +10,7 @@ export const UIContext = createContext<{
 })
 
 const UIContextProvider = ({ children }: PropsWithChildren) => {
-  const [MODE, setMODE] = useState<'light' | 'dark'>('light')
+  const [MODE, setMODE] = useState<'light' | 'dark'>('dark')
 
   const toggleMode = () =>
     setMODE((lst) => {

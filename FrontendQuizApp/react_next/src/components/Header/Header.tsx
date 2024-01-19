@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import React, { useContext } from 'react'
-import { UIContext } from '../providers/UIContextProvider'
+import { UIContext } from '../Wrappers/UIContextProvider'
 
 const Header = () => {
   const ui = useContext(UIContext)

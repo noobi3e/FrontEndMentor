@@ -81,22 +81,20 @@
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   }
 
-  form div a {
+  div a {
     box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
   }
 
-  form {
-    div.cus-light {
-      a,
-      label,
-      div {
-        background: #fff;
-      }
+  div.cus-light {
+    a,
+    label,
+    div {
+      background: #fff;
     }
+  }
 
-    button[type='submit'] {
-      color: #fff !important;
-    }
+  button[type='submit'] {
+    color: #fff !important;
   }
 }
 

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Rubik } from 'next/font/google'
 import '../sass/main.scss'
-import ModeToggleWrapper from '@/components/providers/ModeToggleWrapper'
+import ModeToggleWrapper from '@/components/Wrappers/ModeToggleWrapper'
 import Header from '@/components/Header/Header'
-import UIContextProvider from '@/components/providers/UIContextProvider'
+import UIContextProvider from '@/components/Wrappers/UIContextProvider'
 
 const rubik = Rubik({ subsets: ['latin'] })
 
