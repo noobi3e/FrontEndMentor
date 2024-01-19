@@ -2,46 +2,7 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div className='w-[1400px] mx-auto max-[1400px]:w-full max-[1400px]:px-16 max-[700px]:px-10 max-[550px]:px-5'>
-      <header className='flex justify-between items-center py-16 max-[700px]:py-10 max-[550px]:py-8'>
-        <div className='flex items-center gap-4' id='activeQuizHeader'>
-          {/* HEADER */}
-        </div>
-
-        {/* MODE OPTIONS */}
-        <nav className='flex items-center gap-5'>
-          <Image
-            id='sunIcon'
-            src='/icons/icon-sun-dark.svg'
-            alt='sun icon'
-            height={26}
-            width={26}
-          />
-          <div>
-            {/* TOGGLER */}
-            <input
-              type='checkbox'
-              hidden
-              className='toggleINP'
-              id='toggleModeINP'
-              defaultChecked
-            />
-            <label
-              role='button'
-              htmlFor='toggleModeINP'
-              className='w-[42px] h-6 rounded-full bg-[#EBF2FF] flex relative'>
-              <span className='toggleDOT'></span>
-            </label>
-          </div>
-          <Image
-            src='/icons/icon-moon-light.svg'
-            id='moonIcon'
-            alt='moon icon'
-            width={26}
-            height={26}
-          />
-        </nav>
-      </header>
+    <>
       {/* MAIN QUIZ CONTAINER */}
       <main className='flex items-start mb-16 gap-20 max-[1215px]:gap-10 max-[1050px]:flex-col max-[1050px]:items-stretch max-[1050px]:gap-0 max-[700px]:mb-10 max-[550px]:mb-8 max-[400px]:mb-5'>
         {/* QUESTIONS SECTION */}
@@ -86,6 +47,6 @@ export default function Home() {
           </form>
         </section>
       </main>
-    </div>
+    </>
   )
 }
