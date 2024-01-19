@@ -1,21 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body.cus-dark {
-  @apply bg-primary text-gray-50;
-}
-
-body.cus-light {
-  @apply text-primaryDark bg-[#fff];
-}
-
-html {
-  font-family: 'Rubik', sans-serif;
-}
-
 @layer components {
+  section.cus-dark {
+    @apply bg-primary text-gray-50;
+  }
+
+  section.cus-light {
+    @apply text-primaryDark bg-[#fff];
+  }
+
   .toggleDOT {
     position: absolute;
     top: 50%;
