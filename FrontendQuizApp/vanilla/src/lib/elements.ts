@@ -14,8 +14,6 @@ const submitButton = document.getElementById(
   'submitButton'
 ) as HTMLButtonElement
 
-const toggleModeIcon = document.getElementById('toggleModeIcon') as HTMLElement
-
 const toggleModeINP = document.getElementById(
   'toggleModeINP'
 ) as HTMLInputElement
@@ -31,6 +29,8 @@ const activeQuizHeader = document.getElementById(
 ) as HTMLDivElement
 
 const errorBox = document.getElementById('errorBox') as HTMLParagraphElement
+const sunIcon = document.getElementById('sunIcon') as HTMLImageElement
+const moonIcon = document.getElementById('moonIcon') as HTMLImageElement
 
 const graphicsTop = document.getElementById('graphicsTop') as HTMLDivElement
 const graphicsBottom = document.getElementById(
@@ -44,11 +44,12 @@ export const HTML_ELEMENTS = {
   submitButton,
   optionsContainer,
   toggleModeINP,
-  toggleModeIcon,
   progressBarBOX,
   infoLabel,
   activeQuizHeader,
   errorBox,
   graphicsBottom,
   graphicsTop,
+  sunIcon,
+  moonIcon,
 }
