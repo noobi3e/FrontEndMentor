@@ -27,7 +27,7 @@ export class UI {
     this.#toggleModeBtn.checked = false
     this.#body.classList.add('cus-light')
     this.#body.classList.remove('cus-dark')
-    this.#moonIcon.src = './icons/icon-moon-.svg'
+    this.#moonIcon.src = './icons/icon-moon-light.svg'
     this.#sunIcon.src = './icons/icon-sun-dark.svg'
     this.#optionContainer.classList.add('cus-light')
     this.#progressBar.style.background = '#EBF2FF'
