@@ -11,12 +11,87 @@
 <body>
   <div class="min-h-[100dvh] bg-prBlack flex justify-center items-center">
 
-    <section class="flex flex-col gap-8 w-[540px]">
-      <p class="text-xl text-prGray text-center">Password Generator</p>
+    <main class="flex flex-col gap-8 w-[540px] max-[600px]:w-full mx-5">
+      <h1 class="text-lg text-prGray text-center font-semibold">Password Generator</h1>
 
-      <div class="bg-prBlack2 py-5"></div>
+      <!-- PASS BOX -->
+      <section class="bg-prBlack2 p-5 flex justify-between items-center">
+        <p class="text-prGray text-xl" id="passDisplayBox">P4$5W0rD!</p>
 
-    </section>
+
+        <button type="button" class="outline-none flex items-center gap-3" id="copyBtn">
+          <span class="inline-block transition-all origin-right scale-x-0" id="copiedText">
+            <span class="text-primary"></span>
+          </span>
+          <img src="./images/icon-copy.svg" class="h-full w-auto" />
+        </button>
+      </section>
+
+      <!-- OPTIONS -->
+      <form id="passGenForm" class="bg-prBlack2 p-5 flex text-prWhite flex-col gap-3">
+        <!-- CHAR LENGTH DISP -->
+        <div class="flex justify-between items-center">
+          <h2>Character Length</h2>
+          <p class="text-primary text-xl" id="charLengthDisplay"></p>
+        </div>
+
+        <!-- CHARACTER LENGTH -->
+        <div class="w-full">
+          <input type="range" min="5" max="20" class="w-full" value="10" id="passCharSlider" />
+
+        </div>
+
+        <!-- OPTIONS -->
+        <label role="button" for="isIncludeUpperChar" class="flex items-center gap-4 w-max select-none">
+          <input type="checkbox" id="isIncludeUpperChar" hidden>
+          <span class="flex w-[18px] border-[2px] border-prWhite aspect-square items-center justify-center">
+            <img src="./public/images/icon-check.svg" alt="checed icon" class="hidden">
+          </span>
+          <span>Include Uppercase Character</span>
+        </label>
+
+        <label role="button" for="isIncludeLowerChar" class="flex items-center gap-4 w-max select-none">
+          <input type="checkbox" id="isIncludeLowerChar" hidden>
+          <span class="flex w-[18px] border-[2px] border-prWhite aspect-square items-center justify-center">
+            <img src="./public/images/icon-check.svg" alt="checed icon" class="hidden">
+          </span>
+          <span>Include Lowercase Character</span>
+        </label>
+
+        <label role="button" for="isIncludeNumber" class="flex items-center gap-4 w-max select-none">
+          <input type="checkbox" id="isIncludeNumber" hidden>
+          <span class="flex w-[18px] border-[2px] border-prWhite aspect-square items-center justify-center">
+            <img src="./public/images/icon-check.svg" alt="checed icon" class="hidden">
+          </span>
+          <span>Include Numbers</span>
+        </label>
+
+        <label role="button" for="isIncludeSymbols" class="flex items-center gap-4 w-max select-none">
+          <input type="checkbox" id="isIncludeSymbols" hidden>
+          <span class="flex w-[18px] border-[2px] border-prWhite aspect-square items-center justify-center">
+            <img src="./public/images/icon-check.svg" alt="checed icon" class="hidden">
+          </span>
+          <span>Include Symbols</span>
+        </label>
+
+
+        <div class="w-full p-4 bg-prBlack flex items-center justify-between my-2">
+          <p>Strength</p>
+
+          <div class="flex gap-[5px]">
+            <div class="border-[2px] border-prWhite w-[10px] h-[27px]"></div>
+            <div class="border-[2px] border-prWhite w-[10px] h-[27px]"></div>
+            <div class="border-[2px] border-prWhite w-[10px] h-[27px]"></div>
+            <div class="border-[2px] border-prWhite w-[10px] h-[27px]"></div>
+            <div class="border-[2px] border-prWhite w-[10px] h-[27px]"></div>
+          </div>
+        </div>
+
+
+        <button type="submit"
+          class="bg-primary self-start py-3 w-full text-prBlack border-[2px] border-primary hover:bg-transparent hover:border-prWhite hover:text-prWhite transition-all">Generate</button>
+      </form>
+    </main>
   </div>
   <script type="module" src="/src/main.ts"></script>
 </body>

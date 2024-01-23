@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+*::before,
+*::after {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@layer components {
+  input[type='checkbox'] {
+    &:checked + span {
+      @apply border-primary bg-primary;
+
+      img {
+        @apply inline-block;
+      }
+    }
+  }
+}
